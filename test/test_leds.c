@@ -77,3 +77,18 @@ void test_prender_y_apagar_todos_los_leds(void) {
     LedsTurnAllOff();
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
+
+void test_consulta_estado_led_encendido(void){
+
+    LedsTurnOn(3);
+    bool estado = LedsGetState(3);
+    TEST_ASSERT_EQUAL_UINT8(1, estado);
+}
+
+void test_consulta_estado_led_apagado(void){
+
+    LedsTurnAllOn();
+    LedsTurnOff(5);
+    bool estado = LedsGetState(5);
+    TEST_ASSERT_EQUAL_UINT8(0, estado);
+}

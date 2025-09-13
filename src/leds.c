@@ -50,3 +50,8 @@ void LedsTurnAllOn(void) {
 void LedsTurnAllOff(void) {
     *puerto = ALL_LED_OFF;
 }
+
+bool LedsGetState(int led){
+    return (*puerto & LedToMask(led)) != 0;
+}
+

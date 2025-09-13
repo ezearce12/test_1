@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <stdbool.h>
 #include "errores.h"
 
 void LedsInitDriver(uint16_t *puerto_virtual);
@@ -6,3 +7,4 @@ void LedsTurnOn( int led);   // Usando int me aseguro que el procesador va a hac
 void LedsTurnOff(int led);
 void LedsTurnAllOn(void);
 void LedsTurnAllOff(void);
+bool LedsGetState(int led);
