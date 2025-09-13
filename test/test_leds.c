@@ -92,3 +92,33 @@ void test_consulta_estado_led_apagado(void){
     bool estado = LedsGetState(5);
     TEST_ASSERT_EQUAL_UINT8(0, estado);
 }
+
+void test_prender_y_apagar_led_en_los_extremos(void){
+
+    LedsTurnOn(1);
+    TEST_ASSERT_EQUAL_HEX16(1 << 0, puerto_virtual);
+    LedsTurnOff(1);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
+
+    LedsTurnOn(16);
+    TEST_ASSERT_EQUAL_HEX16(1 << 15, puerto_virtual);
+    LedsTurnOff(16);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
+}
+
+void test_prender_led_mas_de_una_vez_y_verificar_que_sigue_encendido(void){
+
+    LedsTurnOn(3);
+    LedsTurnOn(3);
+    TEST_ASSERT_EQUAL_HEX16(1 << 2, puerto_virtual);
+
+}
+
+void test_apagar_led_mas_de_una_vez_y_verificar_que_sigue_apagado(void){
+
+    LedsTurnOn(5);
+    LedsTurnOff(5);
+    LedsTurnOff(5);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
+}
+
