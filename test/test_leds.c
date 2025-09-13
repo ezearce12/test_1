@@ -122,3 +122,21 @@ void test_apagar_led_mas_de_una_vez_y_verificar_que_sigue_apagado(void){
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
+void test_prender_algunos_leds_despues_prender_todos_y_comprobar_que_todos_esten_encendidos(void){
+
+    LedsTurnOn(5);
+    LedsTurnOn(3);
+    LedsTurnAllOn();
+    TEST_ASSERT_EQUAL_HEX16(0xFFFF, puerto_virtual);
+}
+
+void test_prender_todos_apagar_algunos_leds_apagar_todos_y_comprobar_todos_apagados(void){
+
+    LedsTurnAllOn();
+    LedsTurnOff(3);
+    LedsTurnOff(5);
+    LedsTurnAllOff();
+
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
+}
+
