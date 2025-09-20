@@ -15,6 +15,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Debug - list files
+        run: |
+          pwd
+          ls -la
+          echo "Looking for pre-commit config:"
+          ls -la .pre-commit-config.yaml || echo "File not found"
+          echo "Content of current directory:"
+          find . -name "*.yaml" -o -name "*.yml"
       - uses: actions/setup-python@v4
         with:
           python-version: "3.13"
