@@ -5,25 +5,25 @@
 static uint16_t puerto_virtual;
 
 void setUp(void) {
-    LedsInitDriver(&puerto_virtual);  
+    LedsInitDriver(&puerto_virtual);
 }
 
 void tearDown(void) {
 }
 
-//Iniciar el driver y revisar que todos los leds esten apagados
-void test_al_iniciar_todos_los_leds_estan_apagados(void){
+// Iniciar el driver y revisar que todos los leds esten apagados
+void test_al_iniciar_todos_los_leds_estan_apagados(void) {
 
     uint16_t puerto_virtual = 0xFFFF;
     LedsInitDriver(&puerto_virtual);
 
-    TEST_ASSERT_EQUAL_HEX16(0x0000,puerto_virtual);
+    TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
-//Prender un led y verificar que no cambia el resto
+// Prender un led y verificar que no cambia el resto
 void test_prender_un_led_y_verificar_que_no_cambia_el_resto(void) {
     LedsTurnOn(3);
-    TEST_ASSERT_EQUAL_HEX16(1 << 2, puerto_virtual);    // Verifica si SOLO el led 2 esta encendido
+    TEST_ASSERT_EQUAL_HEX16(1 << 2, puerto_virtual); // Verifica si SOLO el led 2 esta encendido
 }
 
 // prender un led y apagarlo cualquiera
@@ -47,11 +47,10 @@ void test_tratar_de_prender_leds_fuera_de_rango_y_comprobar_que_se_genera_un_err
     RegistrarMensaje_ExpectAnyArgs();
     LedsTurnOn(0);
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
-    
+
     RegistrarMensaje_ExpectAnyArgs();
     LedsTurnOn(17);
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
-
 }
 
 // tratar de apagar leds fuera de rango y comprobar que se genera un error
@@ -59,17 +58,16 @@ void test_tratar_de_apagar_leds_fuera_de_rango_y_comprobar_que_se_genera_un_erro
     RegistrarMensaje_ExpectAnyArgs();
     LedsTurnOff(0);
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
-    
+
     RegistrarMensaje_ExpectAnyArgs();
     LedsTurnOff(17);
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
 void test_prender_todos_los_leds(void) {
-    
+
     LedsTurnAllOn();
     TEST_ASSERT_EQUAL_HEX16(0xFFFF, puerto_virtual);
-
 }
 
 void test_prender_y_apagar_todos_los_leds(void) {
@@ -78,14 +76,14 @@ void test_prender_y_apagar_todos_los_leds(void) {
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
-void test_consulta_estado_led_encendido(void){
+void test_consulta_estado_led_encendido(void) {
 
     LedsTurnOn(3);
     bool estado = LedsGetState(3);
     TEST_ASSERT_EQUAL_UINT8(1, estado);
 }
 
-void test_consulta_estado_led_apagado(void){
+void test_consulta_estado_led_apagado(void) {
 
     LedsTurnAllOn();
     LedsTurnOff(5);
@@ -93,7 +91,7 @@ void test_consulta_estado_led_apagado(void){
     TEST_ASSERT_EQUAL_UINT8(0, estado);
 }
 
-void test_prender_y_apagar_led_en_los_extremos(void){
+void test_prender_y_apagar_led_en_los_extremos(void) {
 
     LedsTurnOn(1);
     TEST_ASSERT_EQUAL_HEX16(1 << 0, puerto_virtual);
@@ -106,15 +104,14 @@ void test_prender_y_apagar_led_en_los_extremos(void){
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
-void test_prender_led_mas_de_una_vez_y_verificar_que_sigue_encendido(void){
+void test_prender_led_mas_de_una_vez_y_verificar_que_sigue_encendido(void) {
 
     LedsTurnOn(3);
     LedsTurnOn(3);
     TEST_ASSERT_EQUAL_HEX16(1 << 2, puerto_virtual);
-
 }
 
-void test_apagar_led_mas_de_una_vez_y_verificar_que_sigue_apagado(void){
+void test_apagar_led_mas_de_una_vez_y_verificar_que_sigue_apagado(void) {
 
     LedsTurnOn(5);
     LedsTurnOff(5);
@@ -122,7 +119,7 @@ void test_apagar_led_mas_de_una_vez_y_verificar_que_sigue_apagado(void){
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
 
-void test_prender_algunos_leds_despues_prender_todos_y_comprobar_que_todos_esten_encendidos(void){
+void test_prender_algunos_leds_despues_prender_todos_y_comprobar_que_todos_esten_encendidos(void) {
 
     LedsTurnOn(5);
     LedsTurnOn(3);
@@ -130,7 +127,7 @@ void test_prender_algunos_leds_despues_prender_todos_y_comprobar_que_todos_esten
     TEST_ASSERT_EQUAL_HEX16(0xFFFF, puerto_virtual);
 }
 
-void test_prender_todos_apagar_algunos_leds_apagar_todos_y_comprobar_todos_apagados(void){
+void test_prender_todos_apagar_algunos_leds_apagar_todos_y_comprobar_todos_apagados(void) {
 
     LedsTurnAllOn();
     LedsTurnOff(3);
@@ -139,4 +136,3 @@ void test_prender_todos_apagar_algunos_leds_apagar_todos_y_comprobar_todos_apaga
 
     TEST_ASSERT_EQUAL_HEX16(0x0000, puerto_virtual);
 }
-

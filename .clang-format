@@ -3,7 +3,6 @@ IndentWidth: 4
 TabWidth: 4
 UseTab: Never
 BreakBeforeBraces: Attach
-AllowShortIfStatementsOnASingleLine: true
 ColumnLimit: 120
 
 AllowShortBlocksOnASingleLine: false

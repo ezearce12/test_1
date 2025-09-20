@@ -6,7 +6,7 @@ Este repositorio contiene la resolución del **Trabajo Práctico N°1** de la ma
 
 ## Consigna
 
-Se debe desarrollar un **controlador de LEDs** siguiendo la metodología **TDD**.  
+Se debe desarrollar un **controlador de LEDs** siguiendo la metodología **TDD**.
 Las pruebas a implementar y cumplir son:
 
 - Después de la inicialización todos los LEDs deben quedar apagados.
@@ -31,8 +31,3 @@ El archivo `test_leds.c` incluye todos los casos de prueba implementados
 - Consulta de estado (`encendido/apagado`) de un LED específico.
 - Pruebas en los extremos (LED 1 y LED 16).
 - Reintentos de encendido/apagado para verificar idempotencia.
-
-
-
-
-
